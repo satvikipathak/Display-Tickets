@@ -2,11 +2,12 @@ from flask import Flask, render_template
 import requests
 
 app = Flask(__name__)
+app.config.from_pyfile('./config/app.conf')
 
 @app.route('/tickets')
 def get_tickets():
-   url = "https://zcc2707.zendesk.com/api/v2/tickets"
-   token = 
+   url = app.config.get("GET_ALL_TICKETS_API")
+   token = app.config.get("OAUTH_ACCESS_TOKEN")
    response = requests.get(url, headers={'Authorization': token})
    if response.status_code != 200:
       return render_template("something_is_not_working.html", response = response)
@@ -25,8 +26,8 @@ def get_tickets():
 
 @app.route('/tickets/<id>', methods = ["GET"])
 def get_ticket(id):
-   url = "https://zcc2707.zendesk.com/api/v2/search.json?query="+id
-   token = 
+   url = app.config.get("GET_SINGLE_TICKET_API") + id
+   token = app.config.get("OAUTH_ACCESS_TOKEN")
    response = requests.get(url, headers={'Authorization': token})
    if response.status_code != 200:
       return render_template("something_is_not_working.html", response = response)
