@@ -5,17 +5,23 @@ app = Flask(__name__)
 
 @app.route('/tickets')
 def get_tickets():
-   url = "https://zcc2707.zendesk.com/api/v2/tickets.json?page[size]=50"
+   url = "https://zcc2707.zendesk.com/api/v2/tickets"
    token = 
    response = requests.get(url, headers={'Authorization': token})
    if response.status_code != 200:
       return render_template("something_is_not_working.html", response = response)
    data = response.json()
-   links = data['links']
-   cursors = data['meta']
+   next_page = data['next_page']
+   previous_page = data['previous_page']
    tickets = data['tickets']
+   while next_page is not None:
+      response = requests.get(next_page, headers={'Authorization': token})
+      if response.status_code != 200:
+         return render_template("something_is_not_working.html", response = response)
+      tickets.append(response.json()['tickets'])
+      next_page = response.json()['next_page']
    #return data
-   return render_template("ticket_list.html", tickets = tickets, links = links, cursors = cursors)
+   return render_template("ticket_list.html", tickets = tickets, next_page = next_page, previous_page = previous_page)
 
 @app.route('/tickets/<id>', methods = ["GET"])
 def get_ticket(id):
