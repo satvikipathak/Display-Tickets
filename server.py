@@ -24,7 +24,10 @@ def get_ticket(id):
    if response.status_code != 200:
       return render_template("something_is_not_working.html", response = response)
    data = response.json()
-   return render_template("ticket.html", ticket = data)
+   if data['count'] != 0:
+      return render_template("ticket.html", ticket = data)
+   else:
+      return render_template("no_such_ticket.html", id = id)
 
 
 if __name__ == '__main__':
