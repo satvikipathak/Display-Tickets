@@ -2,7 +2,7 @@
 
 I have made a flask application that has two endpoints- `/tickets` fetches all the tickets in the account and `/tickets/{ticket-id}` lets the user view details on a single ticket.
 
-Attributes displayed in list view:
+Attributes displayed in the list view:
 1. Id
 2. Subject
 3. Priority
