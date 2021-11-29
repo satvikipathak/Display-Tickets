@@ -3,9 +3,9 @@ def test_get_one_ticket(app, client):
     assert response.status_code == 200
 
 def test_error_on_nonexistent_ticket_id(app, client):
-    #Test with a ticket id that doesn't exist
+    #Test with a ticket id that doesn't exist. Our error handling should work and return 200.
     response = client.get('/tickets/102')
-    assert response.status_code != 200
+    assert response.status_code == 200
 
 def test_get_all_tickets(app, client):
     response = client.get('/tickets')
