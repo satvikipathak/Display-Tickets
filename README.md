@@ -9,7 +9,7 @@ Attributes displayed in the list view:
 4. Status
 
 <p align="center">
-  <img src="./images/list_view.png" alt="List View"/>
+  <img src="./images/list_view.PNG" alt="List View"/>
 </p>
 
 Attributes displayed in the single ticket view:
@@ -25,7 +25,7 @@ Attributes displayed in the single ticket view:
 Requester and Assignee Id are displayed when the names of either one are not present in the response.
 
 <p align="center">
-  <img src="./images/single_ticket_view.png" alt="Single Ticket View"/>
+  <img src="./images/single_ticket_view.PNG" alt="Single Ticket View"/>
 </p>
 
 ## Requirements
